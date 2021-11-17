@@ -15,7 +15,7 @@ import com.example.s205357_wheeloffortune.model.Word
 // Lidt en sammenblanding af adapteren fra Dogglers-app fra Android Codelabs, prøve sig frem og https://medium.com/inside-ppl-b7/recyclerview-inside-fragment-with-android-studio-680cbed59d84
 class LetterCardAdapter(
     private val context: Context?,
-    private val dataset: List<Word>
+    private val dataset: Word
 ): RecyclerView.Adapter<LetterCardAdapter.LetterCardViewHolder>(), ListAdapter {
 
     class LetterCardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
@@ -26,12 +26,22 @@ class LetterCardAdapter(
         return LetterCardViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.letter_card, parent, false))
     }
 
-    override fun getItemCount(): Int = dataset.size
+    // -2 da der kommer et element før og efter ordet
+    override fun getItemCount(): Int = (dataset.word.split("").size)-2
 
     override fun onBindViewHolder(holder: LetterCardViewHolder, position: Int) {
         val resources = context?.resources
-        val item = dataset[position]
-        holder.letterView.text = resources?.getString(R.string.letter, item.word)
+
+        // Opdeler ordet og ligger det i sin egen liste
+        val formattedDataset = dataset.word.split("").toMutableList()
+        // Der er allerede fjernet to kasser for de to tomme strings før og efter ordet.
+        // Nu skal ordet bare "rykkes" på plads, ved at fjerne de to tomme elemter fra listen
+        formattedDataset.removeFirst()
+        formattedDataset.removeLast()
+
+        val item = formattedDataset[position]
+
+        holder.letterView.text = resources?.getString(R.string.letter, item)
     }
 
     // Får fejl med adapterklassen hvis ikke implementeret, selvom den er uden funktion?

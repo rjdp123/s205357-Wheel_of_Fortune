@@ -6,8 +6,9 @@ import com.example.s205357_wheeloffortune.model.Word
 object DataSource {
 
     val words: List<Word> = listOf(
+        Word("Landmark", "Hej med dig, mit navn er Kaj. Hvad er dit? Håber du har det rigtig godt, for så bliver jeg mega meget glad."),
         Word("Landmark", "Grand Canyon"),
-        Word("Landmark", "Ayers rock"),
+        Word("Landmark", "Ayers Rock"),
         Word("Landmark", "Big Ben"),
         Word("Landmark", "Cape Canaveral"),
         Word("Landmark", "Colosseum"),

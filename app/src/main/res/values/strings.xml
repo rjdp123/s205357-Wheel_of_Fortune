@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">s205357 - Wheel of Fortune</string>
     <string name="letter">%1$s</string>
+    <string name="category"><u>Category</u></string>
 </resources>
