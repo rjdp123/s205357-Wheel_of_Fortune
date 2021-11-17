@@ -2,11 +2,14 @@ package com.example.s205357_wheeloffortune.adapter
 
 import android.content.Context
 import android.database.DataSetObserver
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListAdapter
+import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205357_wheeloffortune.R
 import com.example.s205357_wheeloffortune.model.Word
@@ -20,6 +23,7 @@ class LetterCardAdapter(
 
     class LetterCardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
         val letterView: TextView = view!!.findViewById(R.id.letter)
+        val letterBox: RelativeLayout = view!!.findViewById(R.id.letter_filler_box)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LetterCardViewHolder {
@@ -35,13 +39,22 @@ class LetterCardAdapter(
         // Opdeler ordet og ligger det i sin egen liste
         val formattedDataset = dataset.word.split("").toMutableList()
         // Der er allerede fjernet to kasser for de to tomme strings før og efter ordet.
-        // Nu skal ordet bare "rykkes" på plads, ved at fjerne de to tomme elemter fra listen
+        // Nu skal ordet bare "rykkes" på plads, ved at fjerne de to tomme elemter fra listen.
         formattedDataset.removeFirst()
         formattedDataset.removeLast()
 
         val item = formattedDataset[position]
 
-        holder.letterView.text = resources?.getString(R.string.letter, item)
+        // Tydeliggør mellemrum
+        if (item != " "){
+            holder.letterView.text = resources?.getString(R.string.letter, item)
+        } else {
+            // Sætter farve. Kan ikke lige finde ud af præcis hvordan metoden virker,
+            // for den tager en int, og det gør ingen forskel på farven?
+            // Farven matcher kanten på de andre kasser uanset, så ikke rigtig et problem.
+            holder.letterBox.setBackgroundColor(0)
+        }
+
     }
 
     // Får fejl med adapterklassen hvis ikke implementeret, selvom den er uden funktion?

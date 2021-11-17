@@ -9,6 +9,7 @@
     card_view:cardBackgroundColor="#BCBCBC">
 
     <RelativeLayout
+        android:id="@+id/letter_filler_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -19,7 +20,7 @@
             android:id="@+id/letter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="H"
+            android:text=" "
             android:textAllCaps="true"
             android:layout_marginHorizontal="5dp"/>
 
