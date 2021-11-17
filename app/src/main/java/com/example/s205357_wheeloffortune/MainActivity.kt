@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.s205357_wheeloffortune.fragments.GameStartFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
