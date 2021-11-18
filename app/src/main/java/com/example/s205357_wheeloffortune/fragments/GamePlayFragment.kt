@@ -20,14 +20,21 @@ class GamePlayFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        // Mere læsevenlig
+        // Mere læsevenlig ref. til MainActivity
         val mainActivity = (activity as MainActivity)
 
         val view = inflater.inflate(R.layout.game_play_fragment, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.letter_recyclerview)
 
+        // Udvælger tilfældigt ord, opdeler og lægger det i sin egen liste
+        val randomWordList = DataSource.words[mainActivity.randomWordNr].word.split("").toMutableList()
+        // Fjerner det tomme element først og sidst i listen
+        randomWordList.removeFirst()
+        randomWordList.removeLast()
+
+
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = LetterCardAdapter(context, DataSource.words[mainActivity.randomWordNr])
+        val adapter = LetterCardAdapter(context, randomWordList)
         recyclerView.adapter = adapter
 
         // Viser ordkategorien
