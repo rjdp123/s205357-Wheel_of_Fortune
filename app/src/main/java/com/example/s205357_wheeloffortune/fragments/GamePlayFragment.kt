@@ -26,11 +26,11 @@ class GamePlayFragment : Fragment() {
         val view = inflater.inflate(R.layout.game_play_fragment, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.letter_recyclerview)
 
-        // Udvælger tilfældigt ord, opdeler og lægger det i sin egen liste
-        val randomWordList = DataSource.words[mainActivity.randomWordNr].word.split("").toMutableList()
+        // Henter ordet fra MainActivity
+        val randomWordList = mainActivity.randomWordList
         // Fjerner det tomme element først og sidst i listen
-        randomWordList.removeFirst()
-        randomWordList.removeLast()
+        //randomWordList.removeFirst()
+        //randomWordList.removeLast()
 
 
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -58,7 +58,7 @@ class GamePlayFragment : Fragment() {
 
             mainActivity.newRandomWord()
             mainActivity.points++
-            mainActivity.pressedLetterList.clear()
+            mainActivity.correctlyPressedLetters.clear()
 
             mainActivity.showFragment(GamePlayFragment())
         }

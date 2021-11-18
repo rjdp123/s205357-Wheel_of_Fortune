@@ -32,15 +32,12 @@ class LetterCardAdapter(
 
     override fun onBindViewHolder(holder: LetterCardViewHolder, position: Int) {
         val resources = context?.resources
-
         val item = data[position]
 
         // Tydeliggør mellemrum
-        val pressedLetterList = (context as MainActivity).pressedLetterList
-
-
         if (item != " "){
-            if (item in pressedLetterList) {
+            // Vis kun bogstavet hvis det er blevet trykket og korrekt
+            if (item in (context as MainActivity).correctlyPressedLetters) {
                 holder.letterView.text = resources?.getString(R.string.letter, item)
             } else {
 

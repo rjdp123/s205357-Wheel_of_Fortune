@@ -18,6 +18,7 @@ class GameStartFragment : Fragment() {
         knap.setOnClickListener {
             // Følgende link brugt til hvordan man kalder metode fra activity i fragment
             // https://www.tutorialspoint.com/how-to-call-an-activity-method-from-a-fragment-in-android-app-using-kotlin
+            (activity as MainActivity).newRandomWord()
             (activity as MainActivity?)!!.showFragment(GamePlayFragment())
         }
 
