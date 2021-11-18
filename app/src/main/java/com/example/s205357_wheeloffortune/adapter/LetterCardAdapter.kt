@@ -2,16 +2,16 @@ package com.example.s205357_wheeloffortune.adapter
 
 import android.content.Context
 import android.database.DataSetObserver
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListAdapter
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
+import com.example.s205357_wheeloffortune.MainActivity
 import com.example.s205357_wheeloffortune.R
+import com.example.s205357_wheeloffortune.fragments.GamePlayFragment
 import com.example.s205357_wheeloffortune.model.Word
 
 
@@ -46,8 +46,16 @@ class LetterCardAdapter(
         val item = formattedDataset[position]
 
         // Tydeliggør mellemrum
+        val pressedLetterList = (context as MainActivity).pressedLetterList
+
+
         if (item != " "){
-            holder.letterView.text = resources?.getString(R.string.letter, item)
+            if (item in pressedLetterList) {
+                holder.letterView.text = resources?.getString(R.string.letter, item)
+            } else {
+
+            }
+
         } else {
             // Sætter farve. Kan ikke lige finde ud af præcis hvordan metoden virker,
             // for den tager en int, og det gør ingen forskel på farven?

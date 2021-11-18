@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.s205357_wheeloffortune.data.DataSource
+import com.example.s205357_wheeloffortune.fragments.GamePlayFragment
 import com.example.s205357_wheeloffortune.fragments.GameStartFragment
 
 class MainActivity : AppCompatActivity() {
@@ -18,12 +19,14 @@ class MainActivity : AppCompatActivity() {
     // Initialiserer det første ord
     var randomWordNr = (0..((DataSource.words.size)-1)).random()
 
-
     val lifeAtStart = 5
     var remaininglife = lifeAtStart
 
     val pointsAtStart = 0
     var points = pointsAtStart
+
+    // Skal bruges til alfabetknapper
+    val pressedLetterList = mutableListOf<String>()
 
     // Funktion til at skifte fragment
     fun showFragment(fragment: Fragment) {
@@ -37,5 +40,20 @@ class MainActivity : AppCompatActivity() {
     fun newRandomWord() {
         // Vælge random ordnummer med offset af 1 så det passer med antallet i DataSource
         randomWordNr = (0..((DataSource.words.size)-1)).random()
+    }
+
+    // Tryk på alfabetknapper
+    fun letterPressed(letter: String) {
+        pressedLetterList.add(letter)
+
+        showFragment(GamePlayFragment())
+
+        /*
+        if (pressedLetterList.containsAll()) {
+
+        } else {
+            showFragment(GamePlayFragment())
+        }
+         */
     }
 }

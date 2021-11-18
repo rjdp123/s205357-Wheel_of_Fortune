@@ -1,8 +1,6 @@
 package com.example.s205357_wheeloffortune.fragments
 
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.provider.UserDictionary
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,12 +48,101 @@ class GamePlayFragment : Fragment() {
         knap.setOnClickListener {
             // Følgende link brugt til hvordan man kalder metode fra activity i fragment
             // https://www.tutorialspoint.com/how-to-call-an-activity-method-from-a-fragment-in-android-app-using-kotlin
-            mainActivity.showFragment(GamePlayFragment())
 
             mainActivity.newRandomWord()
             mainActivity.points++
+            mainActivity.pressedLetterList.clear()
+
+            mainActivity.showFragment(GamePlayFragment())
+        }
+
+        // Spinknap
+        view.findViewById<Button>(R.id.spinButton).setOnClickListener {
 
         }
+
+
+        // Alfabetknapper
+        view.findViewById<Button>(R.id.letterA).setOnClickListener {
+            mainActivity.letterPressed("a")
+        }
+        view.findViewById<Button>(R.id.letterB).setOnClickListener {
+            mainActivity.letterPressed("b")
+        }
+        view.findViewById<Button>(R.id.letterC).setOnClickListener {
+            mainActivity.letterPressed("c")
+        }
+        view.findViewById<Button>(R.id.letterD).setOnClickListener {
+            mainActivity.letterPressed("d")
+        }
+        view.findViewById<Button>(R.id.letterE).setOnClickListener {
+            mainActivity.letterPressed("e")
+        }
+        view.findViewById<Button>(R.id.letterF).setOnClickListener {
+            mainActivity.letterPressed("f")
+        }
+        view.findViewById<Button>(R.id.letterG).setOnClickListener {
+            mainActivity.letterPressed("g")
+        }
+        view.findViewById<Button>(R.id.letterH).setOnClickListener {
+            mainActivity.letterPressed("h")
+        }
+        view.findViewById<Button>(R.id.letterI).setOnClickListener {
+            mainActivity.letterPressed("i")
+        }
+        view.findViewById<Button>(R.id.letterJ).setOnClickListener {
+            mainActivity.letterPressed("j")
+        }
+        view.findViewById<Button>(R.id.letterK).setOnClickListener {
+            mainActivity.letterPressed("k")
+        }
+        view.findViewById<Button>(R.id.letterL).setOnClickListener {
+            mainActivity.letterPressed("l")
+        }
+        view.findViewById<Button>(R.id.letterM).setOnClickListener {
+            mainActivity.letterPressed("m")
+        }
+        view.findViewById<Button>(R.id.letterN).setOnClickListener {
+            mainActivity.letterPressed("n")
+        }
+        view.findViewById<Button>(R.id.letterO).setOnClickListener {
+            mainActivity.letterPressed("o")
+        }
+        view.findViewById<Button>(R.id.letterP).setOnClickListener {
+            mainActivity.letterPressed("p")
+        }
+        view.findViewById<Button>(R.id.letterQ).setOnClickListener {
+            mainActivity.letterPressed("q")
+        }
+        view.findViewById<Button>(R.id.letterR).setOnClickListener {
+            mainActivity.letterPressed("r")
+        }
+        view.findViewById<Button>(R.id.letterS).setOnClickListener {
+            mainActivity.letterPressed("s")
+        }
+        view.findViewById<Button>(R.id.letterT).setOnClickListener {
+            mainActivity.letterPressed("t")
+        }
+        view.findViewById<Button>(R.id.letterU).setOnClickListener {
+            mainActivity.letterPressed("u")
+        }
+        view.findViewById<Button>(R.id.letterV).setOnClickListener {
+            mainActivity.letterPressed("v")
+        }
+        view.findViewById<Button>(R.id.letterW).setOnClickListener {
+            mainActivity.letterPressed("w")
+        }
+        view.findViewById<Button>(R.id.letterX).setOnClickListener {
+            mainActivity.letterPressed("x")
+        }
+        view.findViewById<Button>(R.id.letterY).setOnClickListener {
+            mainActivity.letterPressed("y")
+        }
+        view.findViewById<Button>(R.id.letterZ).setOnClickListener {
+            mainActivity.letterPressed("z")
+        }
+
+
         return view
     }
 
