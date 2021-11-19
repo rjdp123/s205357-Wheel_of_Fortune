@@ -47,7 +47,7 @@ class GamePlayFragment() : Fragment() {
 
         // Viser tilbageværende liv
         val remainingLifeTextView: TextView = view.findViewById(R.id.remaininglife)
-        remainingLifeTextView.text = "Life Remaining: " + mainActivity.remaininglife.toString()
+        remainingLifeTextView.text = "Lives Remaining: " + mainActivity.remaininglife.toString()
 
 
         // Testknap

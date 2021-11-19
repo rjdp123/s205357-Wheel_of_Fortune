@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     var bankrupt = false
 
-    private val possibleSpins = listOf<String>("extra", "miss", "bankrupt", "50", "100", "250", "500", "1000", "1500", "2500")
-    var spinnedString: String = ""
+    private val possibleSpins = listOf<String>("extra", "miss", "bankrupt", "extra", "miss", "50", "100", "150", "200", "250", "300", "500", "1000", "1500", "2500")
+    var spinnedString: String = "↓ Click to continue ↓"
     private var spinnedInt by Delegates.notNull<Int>()
 
     val alphabet = listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
          */
 
+        spinnedString = ""
         enableLetterButtons = false
         enableSpinButton = true
         checkLives()
@@ -135,6 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
             else -> {
                 spinnedInt = spinnedString.toInt()
+                spinnedString = "You spun: " + spinnedString
                 enableLetterButtons = true
                 enableSpinButton = false
             }
