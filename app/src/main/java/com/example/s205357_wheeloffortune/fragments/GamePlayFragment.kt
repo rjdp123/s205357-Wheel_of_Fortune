@@ -14,7 +14,7 @@ import com.example.s205357_wheeloffortune.R
 import com.example.s205357_wheeloffortune.adapter.LetterCardAdapter
 import com.example.s205357_wheeloffortune.data.DataSource
 
-class GamePlayFragment : Fragment() {
+class GamePlayFragment() : Fragment() {
 
 
 

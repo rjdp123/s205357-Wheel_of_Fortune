@@ -27,16 +27,18 @@ class MainActivity : AppCompatActivity() {
     val remaingLifeAtStart = 5
     var remaininglife = remaingLifeAtStart
 
-    val pointsAtStart = 0
+    private val pointsAtStart = 0
     var points = pointsAtStart
 
-    val possibleSpins = listOf<String>("extra", "miss", "bankrupt", "100", "250", "500", "1000", "1500", "2500")
+    var bankrupt = false
+
+    private val possibleSpins = listOf<String>("extra", "miss", "bankrupt", "50", "100", "250", "500", "1000", "1500", "2500")
     var spinnedString: String = ""
-    var spinnedInt by Delegates.notNull<Int>()
+    private var spinnedInt by Delegates.notNull<Int>()
 
     val alphabet = listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 
-    // Skal bruges til spilfunktionalitet
+    // Aktivér tryk af knapper
     var enableLetterButtons = false
     var enableSpinButton = false
 
@@ -55,6 +57,8 @@ class MainActivity : AppCompatActivity() {
     fun newGame() {
         remaininglife = remaingLifeAtStart
         points = pointsAtStart
+
+        bankrupt = false
 
         correctlyPressedLetters.clear()
         inCorrectlyPressedLetters.clear()
@@ -127,13 +131,12 @@ class MainActivity : AppCompatActivity() {
             }
             "bankrupt" -> {
                 spinnedString = "You went bankrupt on your spin and lost all your lives"
-                remaininglife = 0
+                bankrupt = true
             }
             else -> {
                 spinnedInt = spinnedString.toInt()
                 enableLetterButtons = true
                 enableSpinButton = false
-
             }
         }
         checkLives()
@@ -141,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
     // Funktion til at tjekke hvorvidt spillet er vundet/tabt
     fun checkLives() {
-        if (remaininglife <= 0) {
+        if (remaininglife <= 0 || bankrupt) {
             showFragment(GameLostFragment())
         } else if (correctlyPressedLetters.containsAll(randomWordList)) {
             showFragment(GameWonFragment())
