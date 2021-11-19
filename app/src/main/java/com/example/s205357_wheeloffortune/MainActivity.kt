@@ -30,7 +30,10 @@ class MainActivity : AppCompatActivity() {
     val pointsAtStart = 0
     var points = pointsAtStart
 
+    val alphabet = listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
+
     // Skal bruges til alfabetknapper
+    var enableLetterButtons = true
     val correctlyPressedLetters = mutableListOf<String>()
     val inCorrectlyPressedLetters = mutableListOf<String>()
 
@@ -79,16 +82,15 @@ class MainActivity : AppCompatActivity() {
         // Tjekker hvorvidt spillet skal fortsætte
         if (correctlyPressedLetters.containsAll(randomWordList)) {
             showFragment(GameWonFragment())
-            println("JA DEN ER GOD NOK!!!!")
-            println(correctlyPressedLetters)
-            println(randomWordList)
-            println("JA DEN ER GOD NOK!!!!")
         } else {
             showFragment(GamePlayFragment())
-            println("JA DEN ER WRONG!!!!")
-            println(correctlyPressedLetters)
-            println(randomWordList)
-            println("JA DEN ER WRONG!!!!")
         }
     }
+
+    // Tryk på spinknappen
+    fun spinClick() {
+        val possibleSpins = listOf<String>("Extra turn", "Miss turn", "Bankrupt", "100", "250", "500", "1000", "1500", "2500")
+
+    }
+
 }

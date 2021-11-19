@@ -65,90 +65,33 @@ class GamePlayFragment : Fragment() {
 
         // Spinknap
         view.findViewById<Button>(R.id.spinButton).setOnClickListener {
-
+            mainActivity.spinClick()
         }
 
 
         // Alfabetknapper
-        view.findViewById<Button>(R.id.letterA).setOnClickListener {
-            mainActivity.letterPressed("a")
-        }
-        view.findViewById<Button>(R.id.letterB).setOnClickListener {
-            mainActivity.letterPressed("b")
-        }
-        view.findViewById<Button>(R.id.letterC).setOnClickListener {
-            mainActivity.letterPressed("c")
-        }
-        view.findViewById<Button>(R.id.letterD).setOnClickListener {
-            mainActivity.letterPressed("d")
-        }
-        view.findViewById<Button>(R.id.letterE).setOnClickListener {
-            mainActivity.letterPressed("e")
-        }
-        view.findViewById<Button>(R.id.letterF).setOnClickListener {
-            mainActivity.letterPressed("f")
-        }
-        view.findViewById<Button>(R.id.letterG).setOnClickListener {
-            mainActivity.letterPressed("g")
-        }
-        view.findViewById<Button>(R.id.letterH).setOnClickListener {
-            mainActivity.letterPressed("h")
-        }
-        view.findViewById<Button>(R.id.letterI).setOnClickListener {
-            mainActivity.letterPressed("i")
-        }
-        view.findViewById<Button>(R.id.letterJ).setOnClickListener {
-            mainActivity.letterPressed("j")
-        }
-        view.findViewById<Button>(R.id.letterK).setOnClickListener {
-            mainActivity.letterPressed("k")
-        }
-        view.findViewById<Button>(R.id.letterL).setOnClickListener {
-            mainActivity.letterPressed("l")
-        }
-        view.findViewById<Button>(R.id.letterM).setOnClickListener {
-            mainActivity.letterPressed("m")
-        }
-        view.findViewById<Button>(R.id.letterN).setOnClickListener {
-            mainActivity.letterPressed("n")
-        }
-        view.findViewById<Button>(R.id.letterO).setOnClickListener {
-            mainActivity.letterPressed("o")
-        }
-        view.findViewById<Button>(R.id.letterP).setOnClickListener {
-            mainActivity.letterPressed("p")
-        }
-        view.findViewById<Button>(R.id.letterQ).setOnClickListener {
-            mainActivity.letterPressed("q")
-        }
-        view.findViewById<Button>(R.id.letterR).setOnClickListener {
-            mainActivity.letterPressed("r")
-        }
-        view.findViewById<Button>(R.id.letterS).setOnClickListener {
-            mainActivity.letterPressed("s")
-        }
-        view.findViewById<Button>(R.id.letterT).setOnClickListener {
-            mainActivity.letterPressed("t")
-        }
-        view.findViewById<Button>(R.id.letterU).setOnClickListener {
-            mainActivity.letterPressed("u")
-        }
-        view.findViewById<Button>(R.id.letterV).setOnClickListener {
-            mainActivity.letterPressed("v")
-        }
-        view.findViewById<Button>(R.id.letterW).setOnClickListener {
-            mainActivity.letterPressed("w")
-        }
-        view.findViewById<Button>(R.id.letterX).setOnClickListener {
-            mainActivity.letterPressed("x")
-        }
-        view.findViewById<Button>(R.id.letterY).setOnClickListener {
-            mainActivity.letterPressed("y")
-        }
-        view.findViewById<Button>(R.id.letterZ).setOnClickListener {
-            mainActivity.letterPressed("z")
-        }
+        // Til hvordan man bruger findViewById i et loop: https://stackoverflow.com/questions/4865244/android-using-findviewbyid-with-a-string-in-a-loop
+        // At rykke knapperne ind i et loop har ikke været godt for performancen,
+        // men det er dog langt pænere end at have 26 knapper med ens funktioner.
+        for (i in mainActivity.alphabet) {
+            val buttonRef = resources.getIdentifier(("letter" + i.uppercase()), "id", requireContext().packageName)
+            val button = view.findViewById<Button>(buttonRef)
 
+
+            if (mainActivity.enableLetterButtons == true) {
+                // Tryk på knap
+                button.setOnClickListener { mainActivity.letterPressed(i) }
+
+                // Farve
+                if (i in mainActivity.correctlyPressedLetters) {
+                    button.backgroundTintList = mainActivity.getColorStateList(R.color.green)
+                } else if (i in mainActivity.inCorrectlyPressedLetters) {
+                    button.backgroundTintList = mainActivity.getColorStateList(R.color.red)
+                }
+            } else {
+                button.backgroundTintList = mainActivity.getColorStateList(R.color.grey)
+            }
+        }
 
         return view
     }
