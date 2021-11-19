@@ -56,11 +56,7 @@ class GamePlayFragment : Fragment() {
             // Følgende link brugt til hvordan man kalder metode fra activity i fragment
             // https://www.tutorialspoint.com/how-to-call-an-activity-method-from-a-fragment-in-android-app-using-kotlin
 
-            mainActivity.newRandomWord()
-            mainActivity.points++
-            mainActivity.correctlyPressedLetters.clear()
-
-            mainActivity.showFragment(GamePlayFragment())
+            mainActivity.newGame()
         }
 
         // Spinknap
@@ -77,26 +73,27 @@ class GamePlayFragment : Fragment() {
             val buttonRef = resources.getIdentifier(("letter" + i.uppercase()), "id", requireContext().packageName)
             val button = view.findViewById<Button>(buttonRef)
 
-
-            if (mainActivity.enableLetterButtons == true) {
-                // Tryk på knap
-                button.setOnClickListener { mainActivity.letterPressed(i) }
-
-                // Farve
-                if (i in mainActivity.correctlyPressedLetters) {
-                    button.backgroundTintList = mainActivity.getColorStateList(R.color.green)
-                } else if (i in mainActivity.inCorrectlyPressedLetters) {
-                    button.backgroundTintList = mainActivity.getColorStateList(R.color.red)
+            // Hvis knap ej er blevet trykket..:
+            if ((i !in mainActivity.correctlyPressedLetters) || (i !in mainActivity.inCorrectlyPressedLetters)) {
+                // giv den da farve, hvis der må gættes...
+                if (mainActivity.enableLetterButtons) {
+                    button.setOnClickListener { mainActivity.letterPressed(i) }
+                // og gør den grå, hvis der ikke må
+                } else if (!mainActivity.enableLetterButtons) {
+                    button.backgroundTintList = mainActivity.getColorStateList(R.color.grey)
                 }
-            } else {
-                button.backgroundTintList = mainActivity.getColorStateList(R.color.grey)
+            }
+
+            // Hvis knap er blevet trykket på før, behold da farven
+            if (i in mainActivity.correctlyPressedLetters) {
+                button.backgroundTintList = mainActivity.getColorStateList(R.color.green)
+            }
+            if (i in mainActivity.inCorrectlyPressedLetters) {
+                button.backgroundTintList = mainActivity.getColorStateList(R.color.red)
             }
         }
-
         return view
     }
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
