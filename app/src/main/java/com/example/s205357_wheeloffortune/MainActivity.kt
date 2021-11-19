@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
     val pointsAtStart = 0
     var points = pointsAtStart
 
+    val possibleSpins = listOf<String>("extra", "miss", "bankrupt", "100", "250", "500", "1000", "1500", "2500")
+    var spinnedString: String = ""
+    var spinnedInt by Delegates.notNull<Int>()
+
     val alphabet = listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 
     // Skal bruges til spilfunktionalitet
@@ -64,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         randomWordList.removeFirst()
         randomWordList.removeLast()
 
+        enableSpinButton = true
+
         showFragment(GamePlayFragment())
     }
 
@@ -84,27 +90,64 @@ class MainActivity : AppCompatActivity() {
         // Tjekker om bogstavet indgår i ordet
         if (letter in randomWordList && letter !in correctlyPressedLetters) {
             correctlyPressedLetters.add(letter)
+            // Tilføjer point
+            points = points + (spinnedInt * (randomWordList.count { it == letter }))
         } else if (letter !in inCorrectlyPressedLetters) {
             inCorrectlyPressedLetters.add(letter)
+            // Fjerner ét liv
+            remaininglife = remaininglife - 1
         }
 
         // Tjekker hvorvidt spillet skal fortsætte
+        /*
         if (correctlyPressedLetters.containsAll(randomWordList)) {
             showFragment(GameWonFragment())
+            enableSpinButton = true
         } else {
             showFragment(GamePlayFragment())
         }
+         */
 
         enableLetterButtons = false
+        enableSpinButton = true
+        checkLives()
     }
 
     // Tryk på spinknappen
     fun spinClick() {
-        val possibleSpins = listOf<String>("Extra turn", "Miss turn", "Bankrupt", "100", "250", "500", "1000", "1500", "2500")
+        spinnedString = possibleSpins.random()
+        when (spinnedString) {
+            "extra" -> {
+                spinnedString = "You just got an extra life from your spin"
+                remaininglife++
+            }
+            "miss" -> {
+                spinnedString = "You just lost a life from your spin"
+                remaininglife = remaininglife - 1
+            }
+            "bankrupt" -> {
+                spinnedString = "You went bankrupt on your spin and lost all your lives"
+                remaininglife = 0
+            }
+            else -> {
+                spinnedInt = spinnedString.toInt()
+                enableLetterButtons = true
+                enableSpinButton = false
 
-        enableLetterButtons = !enableLetterButtons
-        showFragment(GamePlayFragment())
+            }
+        }
+        checkLives()
+    }
 
+    // Funktion til at tjekke hvorvidt spillet er vundet/tabt
+    fun checkLives() {
+        if (remaininglife <= 0) {
+            showFragment(GameLostFragment())
+        } else if (correctlyPressedLetters.containsAll(randomWordList)) {
+            showFragment(GameWonFragment())
+        } else {
+            showFragment(GamePlayFragment())
+        }
     }
 
 }

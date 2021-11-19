@@ -60,9 +60,15 @@ class GamePlayFragment : Fragment() {
         }
 
         // Spinknap
-        view.findViewById<Button>(R.id.spinButton).setOnClickListener {
-            mainActivity.spinClick()
+        if (mainActivity.enableSpinButton) {
+            view.findViewById<Button>(R.id.spinButton).setOnClickListener { mainActivity.spinClick() }
+        } else {
+            view.findViewById<Button>(R.id.spinButton).backgroundTintList = mainActivity.getColorStateList(R.color.grey)
         }
+
+        // Spinresultat
+        view.findViewById<TextView>(R.id.spinResult).text = mainActivity.spinnedString
+
 
 
         // Alfabetknapper
