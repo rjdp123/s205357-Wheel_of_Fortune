@@ -14,7 +14,7 @@ import com.example.s205357_wheeloffortune.R
 import com.example.s205357_wheeloffortune.adapter.LetterCardAdapter
 import com.example.s205357_wheeloffortune.data.DataSource
 
-class GamePlayFragment() : Fragment() {
+class GamePlayFragment : Fragment() {
 
 
 
@@ -43,11 +43,11 @@ class GamePlayFragment() : Fragment() {
 
         // Viser points
         val pointsTextView: TextView = view.findViewById(R.id.points)
-        pointsTextView.text = "Points: " + mainActivity.points.toString()
+        pointsTextView.text = getString(R.string.points, mainActivity.points.toString())
 
         // Viser tilbageværende liv
         val remainingLifeTextView: TextView = view.findViewById(R.id.remaininglife)
-        remainingLifeTextView.text = "Lives Remaining: " + mainActivity.remaininglife.toString()
+        remainingLifeTextView.text = getString(R.string.remaining_life, mainActivity.remaininglife.toString())
 
 
         // Testknap
@@ -62,9 +62,9 @@ class GamePlayFragment() : Fragment() {
         // Spinknap
         if (mainActivity.enableSpinButton) {
             if (mainActivity.continueButton) {
-                view.findViewById<Button>(R.id.spinButton).text = "Continue"
+                view.findViewById<Button>(R.id.spinButton).text = getString(R.string.continue_button)
             } else {
-                view.findViewById<Button>(R.id.spinButton).text = "Spin the wheel"
+                view.findViewById<Button>(R.id.spinButton).text = getString(R.string.spin_the_wheel_button)
             }
             view.findViewById<Button>(R.id.spinButton).setOnClickListener { mainActivity.spinClick() }
         } else {
@@ -113,13 +113,4 @@ class GamePlayFragment() : Fragment() {
         }
         return view
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-    }
-
 }

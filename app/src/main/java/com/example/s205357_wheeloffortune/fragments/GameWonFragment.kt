@@ -14,7 +14,7 @@ class GameWonFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.game_won_fragment, container, false)
 
-        view.findViewById<TextView>(R.id.textView).text = "Congratulation, you won the game \n\n With " + (activity as MainActivity).points + " points you must be a true walking dictionary"
+        view.findViewById<TextView>(R.id.textView).text = getString(R.string.win_text, (activity as MainActivity).points.toString())
 
         // Replay
         val knap = view.findViewById<Button>(R.id.replay)

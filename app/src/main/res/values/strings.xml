@@ -2,4 +2,20 @@
     <string name="app_name">s205357 - Wheel of Fortune</string>
     <string name="letter">%1$s</string>
     <string name="category"><u>Category</u></string>
+    <string name="lose_bankrupt_true">Well, it\'s just plain unfortunate to lose on a spin and has nothing to do with your skills whatsoever. Hopefully you have better luck next time</string>
+    <string name="lose_bankrupt_false">Maybe read a dictionary so you won\'t guess on the wrong letter next time</string>
+    <string name="points">Points: %1$s</string>
+    <string name="remaining_life">Lives Remaining: %1$s</string>
+    <string name="continue_button">Continue</string>
+    <string name="spin_the_wheel_button">Spin the wheel</string>
+    <string name="win_text">
+        Congratulations, you won the game
+        \n\n
+        With %1$s points you must be a true walking dictionary</string>
+    <string name="guessed_correctly_string">You just got %1$s points</string>
+    <string name="guessed_incorrectly_string">You just lost a life from your wrong guess and have %1$s left</string>
+    <string name="spin_extra_life">You just got an extra life from your spin</string>
+    <string name="spin_miss_life">You just lost a life from your spin and have %1$s left</string>
+    <string name="spin_bankrupt">You went bankrupt on your spin and lost all of your lives</string>
+    <string name="spin_points">You spun: %1$s</string>
 </resources>

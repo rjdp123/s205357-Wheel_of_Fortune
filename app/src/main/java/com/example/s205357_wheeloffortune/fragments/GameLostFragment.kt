@@ -10,14 +10,14 @@ import androidx.fragment.app.Fragment
 import com.example.s205357_wheeloffortune.MainActivity
 import com.example.s205357_wheeloffortune.R
 
-class GameLostFragment() : Fragment() {
+class GameLostFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.game_lost_fragment, container, false)
 
         if ((activity as MainActivity).bankrupt) {
-            view.findViewById<TextView>(R.id.textView).text = "Well, it's just plain unfortunate to lose on a spin. Hopefully you have better luck next time"
+            view.findViewById<TextView>(R.id.textView).text = getString(R.string.lose_bankrupt_true)
         } else {
-            view.findViewById<TextView>(R.id.textView).text = "Maybe read a dictionary so you won't guess wrong the next time"
+            view.findViewById<TextView>(R.id.textView).text = getString(R.string.lose_bankrupt_false)
         }
 
         // Replay

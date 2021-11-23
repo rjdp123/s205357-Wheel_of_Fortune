@@ -16,7 +16,6 @@
             android:id="@+id/textView"
             android:layout_width="255dp"
             android:layout_height="wrap_content"
-            android:text="That's what happens when you only have one life left and use it on a wrong guess"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

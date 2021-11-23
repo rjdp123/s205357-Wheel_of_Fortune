@@ -10,7 +10,7 @@ import com.example.s205357_wheeloffortune.MainActivity
 import com.example.s205357_wheeloffortune.R
 
 class GameStartFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         val view: View = inflater.inflate(R.layout.game_start_fragment, container, false)
 
