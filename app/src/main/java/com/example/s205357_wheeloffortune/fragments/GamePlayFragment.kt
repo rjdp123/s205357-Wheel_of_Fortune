@@ -61,13 +61,26 @@ class GamePlayFragment() : Fragment() {
 
         // Spinknap
         if (mainActivity.enableSpinButton) {
+            if (mainActivity.continueButton) {
+                view.findViewById<Button>(R.id.spinButton).text = "Continue"
+            } else {
+                view.findViewById<Button>(R.id.spinButton).text = "Spin the wheel"
+            }
             view.findViewById<Button>(R.id.spinButton).setOnClickListener { mainActivity.spinClick() }
         } else {
             view.findViewById<Button>(R.id.spinButton).backgroundTintList = mainActivity.getColorStateList(R.color.grey)
         }
 
+        //view.findViewById<TextView>(R.id.spinResult).text = mainActivity.spinnedString
+
+
         // Spinresultat
-        view.findViewById<TextView>(R.id.spinResult).text = mainActivity.spinnedString
+        if (mainActivity.continueButton || mainActivity.enableLetterButtons) {
+            view.findViewById<TextView>(R.id.spinResult).text = mainActivity.spinnedString
+        } else {
+            view.findViewById<TextView>(R.id.spinResult).text = "hej"
+        }
+
 
 
 

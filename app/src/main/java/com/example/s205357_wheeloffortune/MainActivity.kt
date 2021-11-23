@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Hvis startskærm
+        // Vis startskærm
         showFragment(GameStartFragment())
     }
 
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     var points = pointsAtStart
 
     var bankrupt = false
+    var continueButton = false
 
     private val possibleSpins = listOf<String>("extra", "miss", "bankrupt", "extra", "miss", "50", "100", "150", "200", "250", "300", "500", "1000", "1500", "2500")
     var spinnedString: String = "↓ Click to continue ↓"
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         randomWordList.removeLast()
 
         enableSpinButton = true
+        continueButton = false
 
         showFragment(GamePlayFragment())
     }
@@ -96,59 +98,64 @@ class MainActivity : AppCompatActivity() {
             correctlyPressedLetters.add(letter)
             // Tilføjer point
             points = points + (spinnedInt * (randomWordList.count { it == letter }))
+            spinnedString = "You just got " + (spinnedInt * (randomWordList.count { it == letter })) + " points"
         } else if (letter !in inCorrectlyPressedLetters) {
             inCorrectlyPressedLetters.add(letter)
             // Fjerner ét liv
             remaininglife = remaininglife - 1
+            spinnedString = "You just lost a life from your wrong guess and have " + remaininglife + " left"
         }
 
-        // Tjekker hvorvidt spillet skal fortsætte
-        /*
-        if (correctlyPressedLetters.containsAll(randomWordList)) {
-            showFragment(GameWonFragment())
-            enableSpinButton = true
-        } else {
-            showFragment(GamePlayFragment())
-        }
-         */
 
-        spinnedString = ""
+
         enableLetterButtons = false
         enableSpinButton = true
+        continueButton = true
         checkLives()
     }
 
     // Tryk på spinknappen
     fun spinClick() {
-        spinnedString = possibleSpins.random()
-        when (spinnedString) {
-            "extra" -> {
-                spinnedString = "You just got an extra life from your spin"
-                remaininglife++
+
+        if (!continueButton) {
+            spinnedString = possibleSpins.random()
+            when (spinnedString) {
+                "extra" -> {
+                    spinnedString = "You just got an extra life from your spin"
+                    remaininglife++
+                    continueButton = true
+                }
+                "miss" -> {
+                    remaininglife = remaininglife - 1
+                    if (remaininglife == 0) bankrupt = true
+                    continueButton = true
+                    spinnedString = "You just lost a life from your spin and have " + remaininglife + " left"
+                }
+                "bankrupt" -> {
+                    spinnedString = "You went bankrupt on your spin and lost all of your lives"
+                    bankrupt = true
+                    continueButton = true
+                }
+                else -> {
+                    spinnedInt = spinnedString.toInt()
+                    spinnedString = "You spun: " + spinnedString
+                    enableLetterButtons = true
+                    enableSpinButton = false
+                }
             }
-            "miss" -> {
-                spinnedString = "You just lost a life from your spin"
-                remaininglife = remaininglife - 1
-            }
-            "bankrupt" -> {
-                spinnedString = "You went bankrupt on your spin and lost all your lives"
-                bankrupt = true
-            }
-            else -> {
-                spinnedInt = spinnedString.toInt()
-                spinnedString = "You spun: " + spinnedString
-                enableLetterButtons = true
-                enableSpinButton = false
-            }
+        } else if (continueButton) {
+            continueButton = false
+            enableSpinButton = true
+            enableLetterButtons = false
         }
         checkLives()
     }
 
     // Funktion til at tjekke hvorvidt spillet er vundet/tabt
     fun checkLives() {
-        if (remaininglife <= 0 || bankrupt) {
+        if ((remaininglife <= 0 || bankrupt) && !continueButton) {
             showFragment(GameLostFragment())
-        } else if (correctlyPressedLetters.containsAll(randomWordList)) {
+        } else if ((correctlyPressedLetters.containsAll(randomWordList)) && !continueButton) {
             showFragment(GameWonFragment())
         } else {
             showFragment(GamePlayFragment())
