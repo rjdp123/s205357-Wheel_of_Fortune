@@ -78,7 +78,7 @@ class GamePlayFragment() : Fragment() {
         if (mainActivity.continueButton || mainActivity.enableLetterButtons) {
             view.findViewById<TextView>(R.id.spinResult).text = mainActivity.spinnedString
         } else {
-            view.findViewById<TextView>(R.id.spinResult).text = "hej"
+            view.findViewById<TextView>(R.id.spinResult).text = ""
         }
 
 
