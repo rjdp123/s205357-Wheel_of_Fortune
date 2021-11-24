@@ -10,15 +10,15 @@ import com.example.s205357_wheeloffortune.MainActivity
 import com.example.s205357_wheeloffortune.R
 
 class GameStartFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         val view: View = inflater.inflate(R.layout.game_start_fragment, container, false)
 
-        val knap = view.findViewById<Button>(R.id.play_game)
-        knap.setOnClickListener {
+        // Start spil-knap
+        view.findViewById<Button>(R.id.play_game).setOnClickListener {
             // Følgende link brugt til hvordan man kalder metode fra activity i fragment
             // https://www.tutorialspoint.com/how-to-call-an-activity-method-from-a-fragment-in-android-app-using-kotlin
-            (activity as MainActivity?)!!.showFragment(GamePlayFragment())
+            (activity as MainActivity).newGame()
         }
 
         return view
