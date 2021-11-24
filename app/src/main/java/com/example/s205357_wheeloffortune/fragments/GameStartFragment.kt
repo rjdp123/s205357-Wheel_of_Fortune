@@ -14,8 +14,8 @@ class GameStartFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.game_start_fragment, container, false)
 
-        val knap = view.findViewById<Button>(R.id.play_game)
-        knap.setOnClickListener {
+        // Start spil-knap
+        view.findViewById<Button>(R.id.play_game).setOnClickListener {
             // Følgende link brugt til hvordan man kalder metode fra activity i fragment
             // https://www.tutorialspoint.com/how-to-call-an-activity-method-from-a-fragment-in-android-app-using-kotlin
             (activity as MainActivity).newGame()

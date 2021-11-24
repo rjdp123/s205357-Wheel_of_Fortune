@@ -15,26 +15,16 @@ import com.example.s205357_wheeloffortune.adapter.LetterCardAdapter
 import com.example.s205357_wheeloffortune.data.DataSource
 
 class GamePlayFragment : Fragment() {
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Mere læsevenlig ref. til MainActivity
         val mainActivity = (activity as MainActivity)
 
+        // Sammenkobling af recyclerview og adapter som i Dogglers-app fra Android Codelab
         val view = inflater.inflate(R.layout.game_play_fragment, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.letter_recyclerview)
-
-        // Henter ordet fra MainActivity
-        val randomWordList = mainActivity.randomWordList
-        // Fjerner det tomme element først og sidst i listen
-        //randomWordList.removeFirst()
-        //randomWordList.removeLast()
-
-
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = LetterCardAdapter(context, randomWordList)
+        val adapter = LetterCardAdapter(context, mainActivity.randomWordList)
         recyclerView.adapter = adapter
 
         // Viser ordkategorien
@@ -49,16 +39,6 @@ class GamePlayFragment : Fragment() {
         val remainingLifeTextView: TextView = view.findViewById(R.id.remaininglife)
         remainingLifeTextView.text = getString(R.string.remaining_life, mainActivity.remaininglife.toString())
 
-
-        // Testknap
-        val knap = view.findViewById<Button>(R.id.buttontest)
-        knap.setOnClickListener {
-            // Følgende link brugt til hvordan man kalder metode fra activity i fragment
-            // https://www.tutorialspoint.com/how-to-call-an-activity-method-from-a-fragment-in-android-app-using-kotlin
-
-            mainActivity.newGame()
-        }
-
         // Spinknap
         if (mainActivity.enableSpinButton) {
             if (mainActivity.continueButton) {
@@ -66,13 +46,11 @@ class GamePlayFragment : Fragment() {
             } else {
                 view.findViewById<Button>(R.id.spinButton).text = getString(R.string.spin_the_wheel_button)
             }
+            // Hvis er spinknap aktiv, tilad da at den bruges
             view.findViewById<Button>(R.id.spinButton).setOnClickListener { mainActivity.spinClick() }
         } else {
             view.findViewById<Button>(R.id.spinButton).backgroundTintList = mainActivity.getColorStateList(R.color.grey)
         }
-
-        //view.findViewById<TextView>(R.id.spinResult).text = mainActivity.spinnedString
-
 
         // Spinresultat
         if (mainActivity.continueButton || mainActivity.enableLetterButtons) {
@@ -81,22 +59,19 @@ class GamePlayFragment : Fragment() {
             view.findViewById<TextView>(R.id.spinResult).text = ""
         }
 
-
-
-
         // Alfabetknapper
         // Til hvordan man bruger findViewById i et loop: https://stackoverflow.com/questions/4865244/android-using-findviewbyid-with-a-string-in-a-loop
-        // At rykke knapperne ind i et loop har ikke været godt for performancen,
-        // men det er dog langt pænere end at have 26 knapper med ens funktioner.
-        for (i in mainActivity.alphabet) {
-            val buttonRef = resources.getIdentifier(("letter" + i.uppercase()), "id", requireContext().packageName)
+        // At rykke knapperne ind i et loop lader ikke til at have været godt for performancen,
+        // men det er dog langt pænere end at have 26 knapper med identisk indhold.
+        for (letter in mainActivity.alphabet) {
+            val buttonRef = resources.getIdentifier(("letter" + letter.uppercase()), "id", requireContext().packageName)
             val button = view.findViewById<Button>(buttonRef)
 
             // Hvis knap ej er blevet trykket..:
-            if ((i !in mainActivity.correctlyPressedLetters) || (i !in mainActivity.inCorrectlyPressedLetters)) {
+            if ((letter !in mainActivity.correctlyPressedLetters) || (letter !in mainActivity.inCorrectlyPressedLetters)) {
                 // giv den da farve, hvis der må gættes...
                 if (mainActivity.enableLetterButtons) {
-                    button.setOnClickListener { mainActivity.letterPressed(i) }
+                    button.setOnClickListener { mainActivity.letterPressed(letter) }
                 // og gør den grå, hvis der ikke må
                 } else if (!mainActivity.enableLetterButtons) {
                     button.backgroundTintList = mainActivity.getColorStateList(R.color.grey)
@@ -104,13 +79,14 @@ class GamePlayFragment : Fragment() {
             }
 
             // Hvis knap er blevet trykket på før, behold da farven
-            if (i in mainActivity.correctlyPressedLetters) {
+            if (letter in mainActivity.correctlyPressedLetters) {
                 button.backgroundTintList = mainActivity.getColorStateList(R.color.green)
             }
-            if (i in mainActivity.inCorrectlyPressedLetters) {
+            if (letter in mainActivity.inCorrectlyPressedLetters) {
                 button.backgroundTintList = mainActivity.getColorStateList(R.color.red)
             }
         }
+
         return view
     }
 }

@@ -2,20 +2,48 @@
     <string name="app_name">s205357 - Wheel of Fortune</string>
     <string name="letter">%1$s</string>
     <string name="category"><u>Category</u></string>
-    <string name="lose_bankrupt_true">Well, it\'s just plain unfortunate to lose on a spin and has nothing to do with your skills whatsoever. Hopefully you have better luck next time</string>
-    <string name="lose_bankrupt_false">Maybe read a dictionary so you won\'t guess on the wrong letter next time</string>
+    <string name="lose_text">
+        Maybe read a dictionary so you won\'t guess on the wrong letter next time
+        \n\n
+        By the way, the word was:
+        \n\"%1$s\"
+    </string>
     <string name="points">Points: %1$s</string>
     <string name="remaining_life">Lives Remaining: %1$s</string>
     <string name="continue_button">Continue</string>
     <string name="spin_the_wheel_button">Spin the wheel</string>
     <string name="win_text">
-        Congratulations, you won the game
+        Congratulations, you won the game by guessing the word:
+        \n\"%1$s\"
         \n\n
-        With %1$s points you must be a true walking dictionary</string>
+        With %2$s points you must be a true walking dictionary</string>
     <string name="guessed_correctly_string">You just got %1$s points</string>
     <string name="guessed_incorrectly_string">You just lost a life from your wrong guess and have %1$s left</string>
-    <string name="spin_extra_life">You just got an extra life from your spin</string>
-    <string name="spin_miss_life">You just lost a life from your spin and have %1$s left</string>
-    <string name="spin_bankrupt">You went bankrupt on your spin and lost all of your lives</string>
+    <string name="spin_extra_life">Extra turn - You received an additional life</string>
+    <string name="spin_miss_life">Miss turn - You lost a life and now have %1$s remaining</string>
+    <string name="spin_bankrupt">You Spun: Bankrupt - All your points are gone</string>
     <string name="spin_points">You spun: %1$s</string>
+    <string name="loss_header">Oh No! - You Lose</string>
+    <string name="replay">Play again</string>
+    <string name="spin_the_wheel_text">Spin the wheel</string>
+    <string name="start_header">Welcome to Wheel of Fortune</string>
+    <string name="start_subheader">The rules are simple:</string>
+    <string name="start_description_rules">1. A hidden word will be randomly picked from a category
+        \n\n
+        2. The job is now for you to guess it before you run out of lives
+        \n\n
+        3. You start with 5 lives and 0 points
+        \n\n 4.
+        Before each turn you spin the wheel of four outcomes:
+        \n Get a life, lose a life, a number of points or losing all your points
+        \n\n
+        5. Is it a number you\'ll now be allowed to guess a letter
+        \n\n
+        6. You\'ll get the number of points for each instance if it\'s correct, otherwise you\'ll lose a life
+        \n\n
+        7. Once the word is fully visible you win. If, however, you run out of lives before this, you lose
+        \n\n
+        Ready?</string>
+    <string name="start_play_button">Play Game</string>
+    <string name="win_header">Way to go! - You win</string>
 </resources>

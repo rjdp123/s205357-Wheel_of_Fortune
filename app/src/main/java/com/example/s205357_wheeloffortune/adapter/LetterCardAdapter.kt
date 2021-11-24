@@ -17,15 +17,17 @@ import com.example.s205357_wheeloffortune.R
 class LetterCardAdapter(
     private val context: Context?,
     private val data: MutableList<String>
-): RecyclerView.Adapter<LetterCardAdapter.LetterCardViewHolder>(), ListAdapter {
+) : RecyclerView.Adapter<LetterCardAdapter.LetterCardViewHolder>(), ListAdapter {
 
-    class LetterCardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
+    class LetterCardViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
         val letterView: TextView = view!!.findViewById(R.id.letter)
         val letterBox: RelativeLayout = view!!.findViewById(R.id.letter_filler_box)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LetterCardViewHolder {
-        return LetterCardViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.letter_card, parent, false))
+        return LetterCardViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.letter_card, parent, false)
+        )
     }
 
     override fun getItemCount(): Int = data.size
@@ -35,18 +37,13 @@ class LetterCardAdapter(
         val item = data[position]
 
         // Tydeliggør mellemrum
-        if (item != " "){
+        if (item != " ") {
             // Vis kun bogstavet hvis det er blevet trykket og korrekt
             if (item in (context as MainActivity).correctlyPressedLetters) {
                 holder.letterView.text = resources?.getString(R.string.letter, item)
-            } else {
-
             }
-
         } else {
-            // Sætter farve. Kan ikke lige finde ud af præcis hvordan metoden virker,
-            // for den tager en int, og det gør ingen forskel på farven?
-            // Farven matcher kanten på de andre kasser uanset, så ikke rigtig et problem.
+            // Fylder kassen ud ved mellemrum hvis der skal gættes flere ord
             holder.letterBox.setBackgroundColor(0)
         }
 
